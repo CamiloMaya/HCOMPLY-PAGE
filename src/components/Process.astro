@@ -1,0 +1,21 @@
+---
+const steps = [
+  { n: "01", t: "Diagnóstico", d: "Revisión del estado actual del ciclo de facturación, soportes y oportunidades de mejora." },
+  { n: "02", t: "Plan", d: "Definición de actividades, entregables y cronograma según necesidades y modalidad." },
+  { n: "03", t: "Ejecución", d: "Implementación: auditoría, organización, preauditoría, gestión de glosas y acompañamiento." },
+  { n: "04", t: "Seguimiento", d: "Indicadores, recomendaciones y continuidad para sostener el desempeño." },
+];
+---
+<div class="grid cols-2" style="margin-top:18px;">
+  {steps.map((s) => (
+    <div class="card" style="padding:18px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:38px; height:38px; border-radius:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--stroke); background: rgba(255,255,255,.04); font-weight:800;">
+          {s.n}
+        </div>
+        <div style="font-weight:800; font-size:1.05rem;">{s.t}</div>
+      </div>
+      <div class="p" style="margin-top:10px;">{s.d}</div>
+    </div>
+  ))}
+</div>

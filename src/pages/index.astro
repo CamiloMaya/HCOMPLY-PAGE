@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import ProblemSolution from "../components/ProblemSolution.astro";
+import Section from "../components/Section.astro";
+import ServicesCategories from "../components/ServicesCategories.astro";
+import SuccessCases from "../components/SuccessCases.astro";
+import AboutUs from "../components/AboutUs.astro";
+import ProcessTimeline from "../components/ProcessTimeline.astro";
+import FAQ from "../components/FAQ.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<BaseLayout
+  title="HComply S.A.S. — Portafolio"
+  description="Portafolio de servicios en auditoría en salud, ciclo de facturación, preauditoría, gestión de glosas y acompañamiento normativo."
+>
+  <Header />
+  <main>
+    <AboutUs />
+
+    <Hero />
+
+    <ProblemSolution />
+
+    <Section
+      id="servicios"
+      kicker="Portafolio de servicios"
+      title="Nuestros servicios especializados"
+      subtitle="Soluciones integrales organizadas por áreas de impacto"
+      heroTitle
+    >
+      <ServicesCategories />
+    </Section>
+
+    <SuccessCases />
+
+    <Section
+      id="proceso"
+      kicker="Cómo trabajamos"
+      title="Nuestra metodología"
+      subtitle="Proceso claro, medible y adaptado a tus necesidades"
+    >
+      <ProcessTimeline />
+    </Section>
+
+    <FAQ />
+
+    <Section
+      id="contacto"
+      kicker="Contacto"
+      title="Comencemos con un diagnóstico gratuito"
+      subtitle="Respuesta en menos de 24 horas · Primera consulta sin costo"
+    >
+      <Contact />
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>

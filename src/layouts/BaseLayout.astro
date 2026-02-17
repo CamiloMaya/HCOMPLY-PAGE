@@ -1,0 +1,80 @@
+---
+const {
+  title = "HComply S.A.S. — Auditoría en Salud",
+  description = "Asesoría legal y técnica para cumplimiento normativo y eficiencia operativa en el ciclo de facturación del sector salud.",
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1220" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Scroll-reveal: add .reveal to all sections and key elements
+      function initReveal() {
+        const targets = document.querySelectorAll('.section, .card, .grid > *, .faq-item');
+        targets.forEach(el => {
+          if (!el.classList.contains('reveal')) {
+            el.classList.add('reveal');
+          }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, {
+          threshold: 0.08,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      }
+
+      // Smooth scroll with offset for sticky header
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const headerH = document.querySelector('header')?.offsetHeight ?? 0;
+            const top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Init: reveal + prevent automatic jump to hash on first load
+      function initPage() {
+        initReveal();
+
+        // If the URL contains a hash (e.g. #contacto) we remove it on initial load
+        // so the user lands at the top of the page. In-page clicks will still
+        // respect anchors because we only clear the hash on the first load.
+        if (window.location.hash) {
+          window.scrollTo({ top: 0 });
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+      } else {
+        initPage();
+      }
+    </script>
+  </body>
+</html>

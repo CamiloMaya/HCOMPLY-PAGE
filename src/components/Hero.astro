@@ -1,0 +1,55 @@
+---
+const impactStats = [
+  { value: "500+", label: "Auditorías exitosas" },
+  { value: "95%", label: "Resolución de glosas" },
+  { value: "8+", label: "Años de experiencia" },
+];
+---
+<section class="section" style="padding-top:56px;">
+  <div class="container">
+    <div class="card" style="padding: 26px; position:relative; overflow:hidden;">
+      <div style="position:absolute; inset:-80px -80px auto auto; width:240px; height:240px; border-radius:999px; background: rgba(103,167,255,.18); filter: blur(2px);"></div>
+      <div style="position:absolute; inset:auto auto -90px -90px; width:300px; height:300px; border-radius:999px; background: rgba(61,214,195,.16);"></div>
+
+      <div style="position:relative;">
+        <div class="kicker">Portafolio de servicios</div>
+        <h1 style="font-size: clamp(2.05rem, 4.2vw, 3.1rem); margin: 10px 0 0; line-height:1.1;">
+          Auditoría en salud y gestión del ciclo de facturación
+        </h1>
+        <p class="p" style="max-width: 78ch;">
+          Asesoría estratégica con enfoque legal y técnico para asegurar cumplimiento normativo y eficiencia operativa.
+        </p>
+
+        <div class="btnrow">
+          <a class="btn primary" href="#contacto">Solicitar diagnóstico gratuito</a>
+          <a class="btn" href="#servicios">Ver servicios</a>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:16px; margin-top:24px; padding-top:24px; border-top:1px solid var(--stroke);">
+          {impactStats.map((stat) => (
+            <div style="text-align:center;">
+              <div style="font-size:1.8rem; font-weight:900; color:var(--primary); line-height:1;">{stat.value}</div>
+              <div style="font-size:0.82rem; color:var(--fg-muted); margin-top:4px;">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Misión y Visión -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:24px;">
+      <div class="card" style="padding:18px; border-left:3px solid var(--primary);">
+        <div style="font-weight:900; font-size:0.92rem; margin-bottom:6px; color:var(--primary);">Misión</div>
+        <p class="p" style="font-size:0.85rem;">
+          Posicionarnos como aliado estratégico de las IPS en Colombia, ofreciendo un servicio integral en todo el ciclo de facturación con enfoque legal y técnico que asegura cumplimiento normativo y máxima eficiencia operativa.
+        </p>
+      </div>
+      <div class="card" style="padding:18px; border-left:3px solid var(--secondary);">
+        <div style="font-weight:900; font-size:0.92rem; margin-bottom:6px; color:var(--secondary);">Visión 2028</div>
+        <p class="p" style="font-size:0.85rem;">
+          Ser reconocidos como los aliados estratégicos líderes en Colombia en soluciones integrales para la gestión del ciclo de facturación del sector salud, destacándonos por excelencia técnica y rigurosidad jurídica.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

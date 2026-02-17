@@ -1,0 +1,33 @@
+hcomply-portfolio/
+├─ public/
+│  ├─ favicon.svg
+│  ├─ og.png                  (opcional)
+│  └─ images/
+│     └─ logo.svg             (opcional, si tienes)
+├─ src/
+│  ├─ components/
+│  │  ├─ Header.astro
+│  │  ├─ Footer.astro
+│  │  ├─ Hero.astro
+│  │  ├─ Section.astro
+│  │  ├─ ServicesGrid.astro
+│  │  ├─ Process.astro
+│  │  └─ Contact.astro
+│  ├─ content/
+│  │  └─ services/
+│  │     ├─ capacitacion.md
+│  │     ├─ facturacion-2275.md
+│  │     ├─ organizacion-cuentas.md
+│  │     ├─ preauditoria.md
+│  │     ├─ no-pbs.md
+│  │     ├─ glosas.md
+│  │     ├─ viabilidad-contractual.md
+│  │     └─ cartera.md
+│  ├─ layouts/
+│  │  └─ BaseLayout.astro
+│  ├─ pages/
+│  │  └─ index.astro
+│  └─ styles/
+│     └─ global.css
+├─ astro.config.mjs
+└─ package.json

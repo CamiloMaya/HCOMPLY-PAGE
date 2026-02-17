@@ -1,0 +1,33 @@
+---
+const nav = [
+  { href: "#problema", label: "Soluciones" },
+  { href: "#servicios", label: "Servicios" },
+  { href: "#casos", label: "Casos" },
+  { href: "#proceso", label: "Proceso" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+<header style="position:sticky; top:0; z-index:50; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.10); background: #010D22;">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; padding:0; gap:16px;">
+    <a href="#" class="nav-link" style="display:flex; align-items:center; gap:10px; font-weight:800; text-decoration:none; line-height:0;">
+      <img src="/images/HCOMPLY.png" alt="HComply S.A.S." style="height:96px; width:auto; display:block;" />
+    </a>
+
+    <nav style="display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;">
+      {nav.map((item) => (
+        <a href={item.href} class="nav-link" style="color:var(--muted); font-weight:600; font-size:.85rem; padding:6px 10px; border-radius:8px; transition:all 0.25s;">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-link:hover {
+    color: var(--primary) !important;
+    background: rgba(103,167,255,.08);
+    text-decoration: none;
+  }
+</style>

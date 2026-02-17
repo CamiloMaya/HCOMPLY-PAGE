@@ -1,0 +1,62 @@
+---
+const trustMetrics = [
+  { icon: "🏥", value: "50+", label: "Clientes en sector salud" },
+  { icon: "📊", value: "98%", label: "Tasa de satisfacción" },
+  { icon: "⚡", value: "72h", label: "Tiempo respuesta promedio" },
+  { icon: "🎯", value: "85%", label: "Reducción de glosas" },
+];
+
+const clientLogos = [
+  "IPS Regional",
+  "Clínica Central",
+  "Hospital San José",
+  "Red Salud Plus",
+];
+---
+
+<section class="trust-bar" style="background: linear-gradient(135deg, rgba(103,167,255,0.05) 0%, rgba(61,214,195,0.05) 100%); border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke); padding:32px 0;">
+  <div class="container">
+    <!-- Métricas de confianza -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:24px; margin-bottom:28px;">
+      {trustMetrics.map((metric) => (
+        <div style="text-align:center;">
+          <div style="font-size:2.2rem; margin-bottom:4px;">{metric.icon}</div>
+          <div style="font-size:1.6rem; font-weight:900; color:var(--primary); line-height:1;">{metric.value}</div>
+          <div style="font-size:0.85rem; color:var(--fg-muted); margin-top:4px;">{metric.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Logos de clientes (simulados) -->
+    <div style="padding-top:24px; border-top:1px solid var(--stroke);">
+      <div style="text-align:center; font-size:0.8rem; color:var(--fg-muted); font-weight:600; margin-bottom:16px; text-transform:uppercase; letter-spacing:1px;">
+        Confianza de instituciones líderes
+      </div>
+      <div style="display:flex; justify-content:center; align-items:center; gap:32px; flex-wrap:wrap;">
+        {clientLogos.map((logo) => (
+          <div style="padding:8px 20px; background:rgba(255,255,255,.8); border:1px solid rgba(0,0,0,.08); border-radius:8px; font-size:0.85rem; font-weight:600; color:#2a2a2a;">
+            {logo}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Certificaciones y membresías -->
+    <div style="margin-top:24px; text-align:center;">
+      <div style="display:inline-flex; gap:12px; align-items:center; padding:10px 18px; background:rgba(103,167,255,.08); border-radius:24px; border:1px solid rgba(103,167,255,.2);">
+        <span style="font-size:0.85rem; color:var(--fg-muted);">🏆 Certificados en:</span>
+        <span style="font-size:0.85rem; font-weight:700;">ISO 9001</span>
+        <span style="color:var(--stroke);">•</span>
+        <span style="font-size:0.85rem; font-weight:700;">Res. 2275/2023</span>
+        <span style="color:var(--stroke);">•</span>
+        <span style="font-size:0.85rem; font-weight:700;">Normativa MSPS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    position: relative;
+  }
+</style>

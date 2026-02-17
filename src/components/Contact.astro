@@ -1,0 +1,38 @@
+---
+const phone = "+57 316 313 2857";
+const email = "hcomplysas@gmail.com";
+const cities = ["Pasto – Nariño", "Tuluá – Valle"];
+---
+<div class="card" style="padding: 28px 32px; margin-top:18px; border:1px solid rgba(103,167,255,.2); position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:-60px -60px auto auto; width:200px; height:200px; border-radius:999px; background: rgba(61,214,195,.1); filter:blur(40px);"></div>
+  <div style="position:absolute; inset:auto auto -40px -40px; width:160px; height:160px; border-radius:999px; background: rgba(103,167,255,.08); filter:blur(30px);"></div>
+  <div class="grid cols-2" style="position:relative;">
+    <div>
+      <div style="font-weight:900; font-size:clamp(1.5rem, 3vw, 2rem); line-height:1.2; margin-bottom:8px;">Contáctanos</div>
+      <p class="p" style="font-size:1rem; line-height:1.7; margin-top:8px;">Cuéntanos qué necesitas y te proponemos un diagnóstico rápido con ruta de mejora.</p>
+
+      <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn primary" style="padding:14px 22px; font-size:1rem;" href={`mailto:${email}`}>Escribir al correo</a>
+        <a class="btn" style="padding:14px 22px; font-size:1rem;" href={`https://wa.me/${phone.replace(/\D/g,"")}`} target="_blank" rel="noreferrer">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card" style="padding:14px; background: rgba(255,255,255,.03); box-shadow:none;">
+      <div style="color:var(--muted2); font-weight:700;">Datos</div>
+      <div style="margin-top:10px; display:grid; gap:10px;">
+        <div>
+          <div style="color:var(--muted2); font-size:.9rem;">Teléfono</div>
+          <div style="font-weight:800;">{phone}</div>
+        </div>
+        <div>
+          <div style="color:var(--muted2); font-size:.9rem;">Correo</div>
+          <div style="font-weight:800;">{email}</div>
+        </div>
+        <div>
+          <div style="color:var(--muted2); font-size:.9rem;">Sedes</div>
+          <div style="font-weight:800;">{cities.join(" · ")}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

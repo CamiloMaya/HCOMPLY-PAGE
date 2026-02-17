@@ -1,0 +1,77 @@
+---
+const painPoints = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    title: "Glosas que cuestan millones",
+    problem: "Sin seguimiento adecuado, las devoluciones se acumulan y representan pérdidas significativas en facturación.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    title: "Incumplimiento Resolución 2275",
+    problem: "Facturas rechazadas por no cumplir lineamientos técnicos y normativos. Sanciones y pagos demorados.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+    title: "Auditorías sin trazabilidad",
+    problem: "Procesos desorganizados, documentación incompleta y errores en radicación que generan más devoluciones.",
+  },
+];
+
+const solutions = [
+  {
+    title: "Preauditoría rigurosa",
+    description: "Revisión de cuentas antes de radicación. Detectamos errores antes que las EPS.",
+  },
+  {
+    title: "Gestión integral de glosas",
+    description: "Análisis, respuesta oportuna y seguimiento hasta el cierre. Recuperación promedio del 85%.",
+  },
+  {
+    title: "Cumplimiento normativo",
+    description: "Actualización permanente en Res. 2275/2023 y normativa MSPS. Facturación sin rechazos.",
+  },
+];
+---
+
+<section id="problema" class="section">
+  <div class="container">
+    <div style="text-align:center; max-width:700px; margin:0 auto 32px;">
+      <span class="kicker" style="font-size:1.1rem; letter-spacing:0.15em;">El problema</span>
+      <h2 class="h2" style="font-size:clamp(1.8rem, 3.5vw, 2.6rem); font-weight:900;">Los errores más costosos en facturación de salud</h2>
+    </div>
+
+    <div class="grid cols-3" style="margin-bottom:48px; gap:20px;">
+      {painPoints.map((point) => (
+        <div class="card" style="padding:22px; border-left:3px solid rgba(231,76,60,.5);">
+          <div style="color:var(--fg-muted); margin-bottom:10px;" set:html={point.icon} />
+          <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:8px;">{point.title}</h3>
+          <p class="p" style="font-size:0.88rem;">{point.problem}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center; max-width:700px; margin:0 auto 32px;">
+      <span class="kicker" style="color:var(--primary); font-size:1.1rem; letter-spacing:0.15em;">La solución</span>
+      <h2 class="h2" style="font-size:clamp(1.8rem, 3.5vw, 2.6rem); font-weight:900;">Así lo resolvemos</h2>
+    </div>
+
+    <div class="grid cols-3" style="gap:20px;">
+      {solutions.map((solution, idx) => (
+        <div class="card" style="padding:22px; border-top:3px solid var(--primary);">
+          <div style="width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:var(--primary); color:white; font-weight:900; font-size:1rem; margin-bottom:14px;">
+            {idx + 1}
+          </div>
+          <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:8px;">{solution.title}</h3>
+          <p class="p" style="font-size:0.88rem;">{solution.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid.cols-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+</style>

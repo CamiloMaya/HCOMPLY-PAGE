@@ -1,0 +1,55 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+const servicesDir = path.join(process.cwd(), "src/content/services");
+const files = fs.readdirSync(servicesDir).filter((f) => f.endsWith(".md"));
+
+function parseFrontmatter(md) {
+  const match = md.match(/^---\s*([\s\S]*?)\s*---/);
+  if (!match) return { data: {}, body: md };
+  const raw = match[1];
+  const body = md.slice(match[0].length).trim();
+  const data = {};
+  for (const line of raw.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const idx = trimmed.indexOf(":");
+    if (idx === -1) continue;
+    const k = trimmed.slice(0, idx).trim();
+    let v = trimmed.slice(idx + 1).trim();
+    v = v.replace(/^["']|["']$/g, "");
+    data[k] = v;
+  }
+  return { data, body };
+}
+
+const services = files.map((f) => {
+  const full = fs.readFileSync(path.join(servicesDir, f), "utf8");
+  const { data, body } = parseFrontmatter(full);
+  const excerpt = body.split("\n").find((l) => l.trim().length > 0) ?? "";
+  return {
+    slug: f.replace(".md", ""),
+    title: data.title ?? f.replace(".md", ""),
+    tagline: data.tagline ?? "",
+    icon: data.icon ?? "✓",
+    excerpt: excerpt.trim(),
+    order: Number(data.order ?? 999),
+  };
+}).sort((a, b) => a.order - b.order);
+---
+
+<div class="grid cols-3" style="margin-top:18px;">
+  {services.map((s) => (
+    <div class="card" style="padding:16px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:34px; height:34px; border-radius:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--stroke); background: rgba(255,255,255,.04); font-weight:900;">
+          {s.icon}
+        </div>
+        <div style="font-weight:900;">{s.title}</div>
+      </div>
+      {s.tagline && <div style="margin-top:8px; color:var(--muted2); font-weight:700; font-size:.95rem;">{s.tagline}</div>}
+      <div class="p" style="margin-top:10px;">{s.excerpt}</div>
+    </div>
+  ))}
+</div>

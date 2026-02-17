@@ -1,0 +1,230 @@
+---
+const resources = [
+  {
+    id: 1,
+    icon: "📋",
+    title: "Checklist Res. 2275/2023",
+    description: "Lista de verificación con 24 puntos para garantizar cumplimiento normativo en facturación electrónica",
+    type: "PDF",
+    size: "2.1 MB",
+    color: "rgba(103,167,255,0.15)",
+    borderColor: "rgba(103,167,255,0.4)",
+    downloadUrl: "#",
+    popular: true,
+  },
+  {
+    id: 2,
+    icon: "📊",
+    title: "Plantilla Excel de Glosas",
+    description: "Hoja de cálculo automatizada para seguimiento, clasificación y análisis de glosas con dashboard integrado",
+    type: "XLSX",
+    size: "850 KB",
+    color: "rgba(61,214,195,0.15)",
+    borderColor: "rgba(61,214,195,0.4)",
+    downloadUrl: "#",
+    popular: false,
+  },
+  {
+    id: 3,
+    icon: "🎥",
+    title: "Webinar: Gestión de Glosas",
+    description: "Grabación de 45 minutos con estrategias probadas para reducir glosas en 60% y mejorar tasa de recuperación",
+    type: "Video",
+    size: "1h 45min",
+    color: "rgba(255,193,7,0.15)",
+    borderColor: "rgba(255,193,7,0.4)",
+    downloadUrl: "#",
+    popular: true,
+  },
+  {
+    id: 4,
+    icon: "📚",
+    title: "Guía de Auditoría Interna",
+    description: "Manual paso a paso para implementar auditoría interna efectiva con formatos y procedimientos incluidos",
+    type: "PDF",
+    size: "5.8 MB",
+    color: "rgba(156,39,176,0.15)",
+    borderColor: "rgba(156,39,176,0.4)",
+    downloadUrl: "#",
+    popular: false,
+  },
+];
+
+const blogArticles = [
+  {
+    title: "10 errores mortales en facturación de salud",
+    excerpt: "Descubre los errores más comunes que generan millones en pérdidas y cómo evitarlos",
+    readTime: "5 min",
+    category: "Facturación",
+    icon: "🧾",
+  },
+  {
+    title: "Resolución 2275: Cambios que debes conocer",
+    excerpt: "Análisis detallado de los nuevos requisitos y cómo adaptarte antes de las sanciones",
+    readTime: "7 min",
+    category: "Normativa",
+    icon: "⚖️",
+  },
+  {
+    title: "Cómo reducir glosas en 90 días",
+    excerpt: "Metodología paso a paso aplicada exitosamente en más de 30 instituciones",
+    readTime: "6 min",
+    category: "Gestión",
+    icon: "📈",
+  },
+];
+---
+
+<section class="section" style="background:linear-gradient(180deg, white 0%, rgba(103,167,255,.03) 100%);">
+  <div class="container">
+    <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <span class="kicker" style="color:var(--primary);">🎁 Recursos gratuitos</span>
+      <h2 style="font-size:clamp(1.8rem, 3.5vw, 2.5rem); margin-top:10px; line-height:1.2;">
+        Herramientas y contenido para optimizar tu gestión hoy mismo
+      </h2>
+      <p class="p" style="margin-top:14px;">
+        Descarga gratis plantillas, guías y recursos que usamos con nuestros clientes
+      </p>
+    </div>
+
+    <!-- Grid de recursos descargables -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:56px;">
+      {resources.map((resource) => (
+        <div
+          class="card resource-card"
+          style={`padding:28px; border:2px solid ${resource.borderColor}; background:${resource.color}; transition:all 0.3s; cursor:pointer; position:relative; overflow:hidden;`}
+        >
+          {resource.popular && (
+            <div style="position:absolute; top:12px; right:12px; background:#e74c3c; color:white; font-size:0.7rem; padding:4px 10px; border-radius:12px; font-weight:800;">
+              Popular
+            </div>
+          )}
+
+          {/* Highlight: show resolution image for 2275 resource so it stands out */}
+          {resource.title.includes('2275') ? (
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div style="flex:0 0 140px;">
+                <img src="/images/RESOLUCION 2275.png" alt="Resolución 2275" style="width:100%; height:auto; border-radius:10px; box-shadow:0 10px 30px rgba(11,18,32,0.08);" />
+              </div>
+
+              <div style="flex:1;">
+                <div style="font-size:2.4rem; margin-bottom:6px;">{resource.icon}</div>
+                <h3 style="font-size:1.18rem; font-weight:900; margin-bottom:8px; line-height:1.25;">{resource.title}</h3>
+                <p class="p" style="font-size:0.95rem; margin-bottom:12px; line-height:1.45;">{resource.description}</p>
+
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                  <span style="font-size:0.8rem; font-weight:700; padding:6px 12px; background:white; color:#1a1a1a; border-radius:8px; border:1px solid rgba(0,0,0,.08);">{resource.type}</span>
+                  <span style="font-size:0.85rem; color:var(--muted);">{resource.size}</span>
+                </div>
+
+                <p style="font-size:0.85rem; color:var(--fg-muted); margin-top:6px;">Descarga la checklist completa para ajustar tus facturas al nuevo marco normativo.</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div style="font-size:3.5rem; margin-bottom:16px;">{resource.icon}</div>
+
+              <h3 style="font-size:1.15rem; font-weight:900; margin-bottom:10px; line-height:1.3;">{resource.title}</h3>
+
+              <p class="p" style="font-size:0.9rem; margin-bottom:18px; line-height:1.5;">{resource.description}</p>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; padding-top:14px; border-top:1px solid var(--stroke);">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:0.8rem; font-weight:700; padding:4px 10px; background:white; color:#1a1a1a; border-radius:6px; border:1px solid rgba(0,0,0,.15);">{resource.type}</span>
+                  <span style="font-size:0.8rem; color:var(--muted);">{resource.size}</span>
+                </div>
+              </div>
+            </>
+          )}
+
+          <a href={resource.downloadUrl} class="btn primary" style="width:100%; justify-content:center; display:flex; align-items:center; gap:8px; margin-top:12px;">⬇️ Descargar gratis</a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Sección de blog/artículos -->
+    <div style="margin-bottom:48px;">
+      <div style="text-align:center; margin-bottom:32px;">
+        <h3 style="font-size:1.5rem; font-weight:900; margin-bottom:10px;">
+          📰 Artículos recientes del blog
+        </h3>
+        <p class="p">
+          Conocimiento práctico basado en nuestra experiencia con más de 50 instituciones
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+        {blogArticles.map((article) => (
+          <div class="card" style="padding:24px; transition:all 0.3s; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="font-size:2rem;">{article.icon}</div>
+              <span style="font-size:0.8rem; font-weight:700; padding:4px 12px; background:rgba(103,167,255,.15); border-radius:12px; color:var(--primary);">
+                {article.category}
+              </span>
+            </div>
+
+            <h4 style="font-size:1.1rem; font-weight:900; margin-bottom:10px; line-height:1.3;">
+              {article.title}
+            </h4>
+
+            <p class="p" style="font-size:0.9rem; margin-bottom:14px;">
+              {article.excerpt}
+            </p>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--stroke);">
+              <span style="font-size:0.8rem; color:var(--fg-muted);">
+                ⏱️ {article.readTime}
+              </span>
+              <span style="color:var(--primary); font-weight:700; font-size:0.85rem;">
+                Leer más →
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA Newsletter -->
+    <div class="card" style="padding:40px; background:linear-gradient(135deg, var(--primary), var(--secondary)); color:white; text-align:center;">
+      <div style="font-size:2.5rem; margin-bottom:16px;">📬</div>
+      <h3 style="font-size:1.6rem; font-weight:900; margin-bottom:12px;">
+        Recibe contenido exclusivo cada mes
+      </h3>
+      <p style="font-size:1rem; opacity:0.95; margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">
+        Únete a más de 500 profesionales que reciben tips, actualizaciones normativas y casos de éxito directamente en su correo
+      </p>
+
+      <form style="display:flex; gap:12px; max-width:500px; margin:0 auto; flex-wrap:wrap;">
+        <input 
+          type="email" 
+          placeholder="tu@email.com" 
+          style="flex:1; min-width:250px; padding:14px 20px; border-radius:8px; border:none; font-size:1rem;"
+        />
+        <button 
+          type="submit" 
+          class="btn" 
+          style="background:white; color:var(--primary); font-weight:800; padding:14px 28px; border:none; cursor:pointer; border-radius:8px; white-space:nowrap;"
+        >
+          Suscribirme gratis
+        </button>
+      </form>
+
+      <div style="font-size:0.85rem; margin-top:14px; opacity:0.85;">
+        ✓ Sin spam · ✓ Cancela cuando quieras · ✓ 1 email al mes
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .resource-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: var(--primary);
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+const faqs = [
+  {
+    q: "¿Cuánto tiempo toma ver resultados?",
+    a: "En promedio, nuestros clientes ven mejoras significativas en las primeras 4 semanas. La reducción de glosas comienza desde el primer mes y la optimización completa toma entre 3-6 meses.",
+  },
+  {
+    q: "¿Trabajan de forma presencial o remota?",
+    a: "Ofrecemos ambas modalidades: 100% remoto, presencial o híbrido según las necesidades de tu institución.",
+  },
+  {
+    q: "¿Cuál es el costo de sus servicios?",
+    a: "El costo varía según el servicio, tamaño de la institución y modalidad. Ofrecemos cotizaciones personalizadas después de un diagnóstico inicial gratuito.",
+  },
+  {
+    q: "¿Atienden instituciones pequeñas?",
+    a: "Sí, trabajamos con instituciones de todos los tamaños. Tenemos paquetes escalables diseñados para instituciones pequeñas y medianas.",
+  },
+];
+---
+
+<section id="faq" class="section">
+  <div class="container" style="max-width:1100px;">
+    <div style="grid-column:1 / -1; text-align:center; margin-bottom:32px;">
+      <span class="kicker">Preguntas frecuentes</span>
+      <h2 class="h2">Resolvemos tus dudas</h2>
+    </div>
+
+    <div id="faq-grid" style="display:grid; grid-template-columns: 1fr 340px; gap:24px; align-items:stretch;">
+      <!-- Left: preguntas -->
+      <div id="faq-left" style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:grid; gap:12px;">
+          {faqs.map((faq, idx) => (
+            <div class="card faq-item" style="padding:0; overflow:hidden; transition:all 0.3s;">
+              <button
+                class="faq-question"
+                style="width:100%; text-align:left; padding:18px 22px; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-weight:800; font-size:0.95rem; gap:12px; color:rgba(255,255,255,.95);"
+              >
+                <span>{faq.q}</span>
+                <span class="faq-icon" style="color:var(--primary); font-size:1rem; transition:transform 0.3s; flex-shrink:0;">▼</span>
+              </button>
+              <div class="faq-answer" style="max-height:0; overflow:hidden; transition:all 0.3s;">
+                <div style="padding:0 22px 18px;">
+                  <p class="p" style="font-size:0.9rem; line-height:1.6; color:rgba(255,255,255,.85);">{faq.a}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: imagen RESOLUCION 2275 -->
+      <div id="faq-image-wrap" style="display:flex; align-items:stretch; justify-content:center;">
+        <img id="faq-image" src="/images/RESOLUCION 2275.png" alt="Resolución 2275" style="height:100%; max-width:340px; width:auto; border-radius:12px; object-fit:cover; box-shadow:0 8px 24px rgba(2,6,23,0.6);" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item:hover { border-color: var(--primary); }
+  .faq-item.active .faq-icon { transform: rotate(180deg); }
+  .faq-item.active .faq-answer { max-height: 300px; }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach((button) => {
+    button.addEventListener('click', () => {
+      const faqItem = button.closest('.faq-item');
+      const isActive = faqItem.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach((item) => item.classList.remove('active'));
+      if (!isActive) faqItem.classList.add('active');
+    });
+  });
+
+  // Ensure the left column of FAQs fills the full height of the image on wide screens
+  function syncFaqHeight() {
+    const grid = document.getElementById('faq-grid');
+    const left = document.getElementById('faq-left');
+    const img = document.getElementById('faq-image');
+    if (!grid || !left || !img) return;
+    // On small screens let the natural flow stack elements
+    if (window.innerWidth < 720) {
+      left.style.minHeight = '';
+      img.style.height = '';
+      return;
+    }
+    const imgHeight = img.offsetHeight;
+    if (imgHeight > 0) {
+      left.style.minHeight = imgHeight + 'px';
+      // ensure image fills its column height
+      img.style.height = '100%';
+    }
+  }
+
+  window.addEventListener('load', syncFaqHeight);
+  window.addEventListener('resize', syncFaqHeight);
+</script>

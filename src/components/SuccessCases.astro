@@ -1,0 +1,78 @@
+---
+const successCases = [
+  {
+    client: "Centro Medico Valle de Atriz",
+    type: "Institución de salud nivel II · Pasto",
+    problem: "Dificultad de seguimiento de radicacion de facturas",
+    results: [
+      { metric: "Sistema de Seguimiento de Radicacion", label: "Implementando dashboard en tiempo real y deteccion de fecha de factura para evitar vencimiento" },
+      { metric: "Automatizacion de Procesos Repetivivos", label: "Programas de gestion masiva para auditoria de facturas y soportes de cuentas medicas" },
+      { metric: "Mejora del 100% en el Rendimiento de Facturacion", label: "Reducción de errores, disminucion de tiempos, estructura profesional de procesos." },
+    ],
+    testimonial: "Identificacion de falta de procesos y mejora en base a sistemas de informacion eficacez y escalables",},
+  {
+    client: "Medisfarma",
+    type: "Dispensadora de medicamentos",
+    problem: "Mala gestion de resolucion y segumiento en glosas",
+    results: [
+      { metric: "Auditoria exaustiva", label: "Facturas perdidas de seguimiento y en estancamiento de pago por glosas" },
+      { metric: "Resolucion de facturacion estancada", label: "Resolucion de medicamentos sin facuturar" },
+      { metric: "60%", label: "Reduccion de glosa levantando procesos de auditoria y control" },
+    ],
+    testimonial: "Audotoria exaustiva en facturacion estancada y glosas no resueltas permitiendo el pago de facuturas sin seguimiento.",
+  },
+];
+---
+
+<section id="casos" class="section">
+  <div class="container">
+    <div style="text-align:center; max-width:700px; margin:0 auto 40px;">
+      <span class="kicker">Casos de éxito</span>
+      <h2 class="h2">Resultados reales de nuestros clientes</h2>
+    </div>
+
+    <div style="display:grid; gap:24px;">
+      {successCases.map((case_item) => (
+        <div class="card" style="padding:28px; border-left:4px solid var(--primary);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start;" class="case-grid">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:900; margin-bottom:4px;">{case_item.client}</h3>
+              <div style="font-size:0.85rem; color:var(--fg-muted); margin-bottom:14px;">{case_item.type}</div>
+
+              <div style="margin-bottom:16px;">
+                <div style="font-weight:700; font-size:0.85rem; color:rgba(231,76,60,.8); margin-bottom:4px;">Problema:</div>
+                <p class="p" style="font-size:0.9rem;">{case_item.problem}</p>
+              </div>
+
+              <div style="padding:14px; border-left:3px solid var(--secondary); border-radius:0 8px 8px 0; background:rgba(61,214,195,.05);">
+                <p style="font-size:0.88rem; font-style:italic; color:var(--muted); line-height:1.5; margin:0 0 8px 0;">
+                  "{case_item.testimonial}"
+                </p>
+                <div style="font-size:0.82rem; color:var(--fg-muted);">
+                  <strong>{case_item.author}</strong> · {case_item.role}
+                </div>
+              </div>
+            </div>
+
+            <div style="display:grid; gap:12px;">
+              {case_item.results.map((result) => (
+                <div class="card" style="padding:16px; text-align:center;">
+                  <div style="font-size:1.8rem; font-weight:900; color:var(--primary); line-height:1;">{result.metric}</div>
+                  <div style="font-size:0.82rem; color:var(--fg-muted); margin-top:4px;">{result.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .case-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

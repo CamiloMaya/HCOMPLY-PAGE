@@ -1,0 +1,11 @@
+---
+const { id, kicker, title, subtitle, heroTitle } = Astro.props;
+---
+<section id={id} class="section">
+  <div class="container">
+    {kicker && <div class="kicker" style={heroTitle ? "font-size:0.95rem; letter-spacing:.15em;" : ""}>{kicker}</div>}
+    {title && <h2 class="h2" style={heroTitle ? "font-size:clamp(2rem, 4vw, 2.8rem); margin:12px 0 0;" : ""}>{title}</h2>}
+    {subtitle && <p class="p" style={heroTitle ? "font-size:1.05rem; margin:10px 0 0;" : ""}>{subtitle}</p>}
+    <slot />
+  </div>
+</section>

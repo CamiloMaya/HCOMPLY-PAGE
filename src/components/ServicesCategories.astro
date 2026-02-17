@@ -1,0 +1,223 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+const servicesDir = path.join(process.cwd(), "src/content/services");
+const files = fs.readdirSync(servicesDir).filter((f) => f.endsWith(".md"));
+
+function parseFrontmatter(md) {
+  const match = md.match(/^---\s*([\s\S]*?)\s*---/);
+  if (!match) return { data: {}, body: md };
+  const raw = match[1];
+  const body = md.slice(match[0].length).trim();
+  const data = {};
+  for (const line of raw.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const idx = trimmed.indexOf(":");
+    if (idx === -1) continue;
+    const k = trimmed.slice(0, idx).trim();
+    let v = trimmed.slice(idx + 1).trim();
+    v = v.replace(/^["']|["']$/g, "");
+    data[k] = v;
+  }
+  return { data, body };
+}
+
+const allServices = files.map((f) => {
+  const full = fs.readFileSync(path.join(servicesDir, f), "utf8");
+  const { data, body } = parseFrontmatter(full);
+  const excerpt = body.split("\n").find((l) => l.trim().length > 0) ?? "";
+  return {
+    slug: f.replace(".md", ""),
+    title: data.title ?? f.replace(".md", ""),
+    tagline: data.tagline ?? "",
+    icon: data.icon ?? `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+    excerpt: excerpt.trim(),
+    order: Number(data.order ?? 999),
+  };
+}).sort((a, b) => a.order - b.order);
+
+// Categorizar servicios
+const categories = [
+  {
+    id: "formacion",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    title: "Formación y Prevención",
+    description: "Capacitación y prevención de errores antes de la radicación",
+    color: "rgba(61,214,195,0.15)",
+    borderColor: "rgba(61,214,195,0.4)",
+    services: allServices.filter(s => 
+      s.slug === "capacitacion" || s.slug === "preauditoria"
+    ),
+    popular: true,
+  },
+  {
+    id: "operativa",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+    title: "Gestión Operativa",
+    description: "Procesos de facturación, organización y seguimiento diario",
+    color: "rgba(61,214,195,0.15)",
+    borderColor: "rgba(61,214,195,0.4)",
+    services: allServices.filter(s => 
+      s.slug === "facturacion-2275" || 
+      s.slug === "organizacion-cuentas" || 
+      s.slug === "no-pbs" || 
+      s.slug === "cartera"
+    ),
+  },
+  {
+    id: "cumplimiento",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: "Resolución y Cumplimiento",
+    description: "Gestión de glosas, contratos y cumplimiento normativo",
+    color: "rgba(61,214,195,0.15)",
+    borderColor: "rgba(61,214,195,0.4)",
+    services: allServices.filter(s => 
+      s.slug === "glosas" || s.slug === "viabilidad-contractual"
+    ),
+  },
+];
+---
+
+<div style="margin-top:28px;">
+  <!-- Tabs de categorías -->
+  <div class="services-tabs" style="display:flex; gap:36px; margin-bottom:32px; flex-wrap:wrap; justify-content:center;">
+    {categories.map((cat, idx) => (
+      <button 
+        class={`service-tab ${idx === 0 ? 'active' : ''}`}
+        data-category={cat.id}
+        style={`padding:14px 24px; border-radius:12px; border:2px solid ${cat.borderColor}; background:${cat.color}; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.3s; position:relative;`}
+      >
+        <span style="display:inline-flex; align-items:center; margin-right:8px; color:currentColor;" set:html={cat.icon} />
+        {cat.title}
+        {cat.popular && (
+          <span style="position:absolute; top:-8px; right:-8px; background:#e74c3c; color:white; font-size:0.7rem; padding:2px 8px; border-radius:12px; font-weight:800;">
+            Popular
+          </span>
+        )}
+      </button>
+    ))}
+  </div>
+
+  <!-- Contenido de cada categoría -->
+  {categories.map((cat, idx) => (
+    <div 
+      class={`category-content ${idx === 0 ? 'active' : ''}`}
+      data-category={cat.id}
+      style="display:none;"
+    >
+      <!-- Header de categoría -->
+      <div style="text-align:center; margin-bottom:28px; padding:20px; background:linear-gradient(135deg, rgba(103,167,255,0.05), rgba(61,214,195,0.05)); border-radius:16px;">
+        <div style="color:var(--fg-muted); margin-bottom:10px;" set:html={cat.icon} />
+        <h3 style="font-size:1.5rem; font-weight:900; margin-bottom:8px;">{cat.title}</h3>
+        <p class="p" style="color:var(--fg-muted);">{cat.description}</p>
+      </div>
+
+      <!-- Grid de servicios -->
+      <div class="grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+        {cat.services.map((s) => (
+          <div class="card service-card" style="padding:24px; transition:all 0.3s; cursor:pointer; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:0; right:0; width:80px; height:80px; background:linear-gradient(135deg, var(--primary), var(--secondary)); opacity:0.05; border-radius:0 0 0 100%;"></div>
+            
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; position:relative;">
+              <div style="width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center; border:2px solid var(--stroke); background:rgba(255,255,255,.06); color:var(--fg-muted); flex-shrink:0;" set:html={s.icon} />
+              <div>
+                <div style="font-weight:900; font-size:1.05rem; line-height:1.2;">{s.title}</div>
+                {s.tagline && (
+                  <div style="color:var(--primary); font-weight:600; font-size:0.85rem; margin-top:2px;">
+                    {s.tagline}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <p class="p" style="font-size:0.9rem; line-height:1.5; position:relative;">
+              {s.excerpt}
+            </p>
+
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--stroke); position:relative;">
+              <span style="color:var(--primary); font-weight:700; font-size:0.85rem; display:inline-flex; align-items:center; gap:6px;">
+                Ver detalles →
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <!-- CTA -->
+  <div style="text-align:center; margin-top:40px;">
+    <a class="btn primary" href="#contacto">Solicitar cotización →</a>
+  </div>
+</div>
+
+<style>
+  .service-tab {
+    transition: all 0.3s ease;
+    color: white;
+  }
+  
+  .service-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(103,167,255,0.3);
+    border-color: rgba(255,255,255,0.5) !important;
+  }
+  
+  .service-tab.active {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(103,167,255,0.4), 0 6px 24px rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.7) !important;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(103,167,255,0.3), rgba(61,214,195,0.25)) !important;
+  }
+
+  .category-content {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .category-content.active {
+    display: block !important;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: var(--primary);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Funcionalidad de tabs
+  const tabs = document.querySelectorAll('.service-tab');
+  const contents = document.querySelectorAll('.category-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.getAttribute('data-category');
+      
+      // Remover active de todos
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      
+      // Activar el seleccionado
+      tab.classList.add('active');
+      const targetContent = document.querySelector(`.category-content[data-category="${category}"]`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
+</script>
