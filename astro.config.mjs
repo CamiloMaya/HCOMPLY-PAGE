@@ -1,10 +1,5 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
+import { defineConfig } from "astro/config";
 
-// https://astro.build/config
 export default defineConfig({
-  output: 'static',
-  adapter: cloudflare(),
-  site: 'https://hcomply.com', // Cambia esto por tu dominio real
+  output: "static",
 });
