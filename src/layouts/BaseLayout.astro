@@ -1,9 +1,12 @@
 ---
+import "../styles/global.css";
+
 const {
   title = "HComply S.A.S. — Auditoría en Salud",
   description = "Asesoría legal y técnica para cumplimiento normativo y eficiencia operativa en el ciclo de facturación del sector salud.",
 } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -13,7 +16,6 @@ const {
     <meta name="theme-color" content="#0b1220" />
     <title>{title}</title>
     <link rel="icon" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <slot />
